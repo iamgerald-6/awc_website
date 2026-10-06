@@ -3,24 +3,76 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #ffffff;
+  --secondary: #6c5e42;
+  --secondary-foreground: #ffffff;
+  --accent: #b45309;
+  --accent-bright: #d97706;
+  --accent-foreground: #ffffff;
+  --surface: #ffffff;
+  --surface-dark: #252525;
+  --surface-warm: #6c5e42;
+  --surface-muted: #292725;
+  --muted: #57534e;
+  --border: rgb(0 0 0 / 0.1);
+  --brand-light: #f4f4f5;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.06);
+  --section-py: clamp(3rem, 6vw, 5rem);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-surface: var(--surface);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-warm: var(--surface-warm);
+  --color-surface-muted: var(--surface-muted);
+  --color-muted: var(--muted);
+  --color-brand-gray: var(--muted);
+  --color-brand-dark: var(--foreground);
+  --color-brand-light: var(--brand-light);
+  --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+@layer utilities {
+  .section-padding {
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+  }
+  .text-accent-on-dark {
+    color: var(--accent-bright);
+  }
+  .text-accent-on-light {
+    color: var(--accent);
+  }
 }
