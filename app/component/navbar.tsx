@@ -154,7 +154,7 @@ function MobileDropdown({
     isDropdownActive(pathname, entry.children);
 
   return (
-    <div className="rounded-xl border border-border overflow-hidden">
+    <div className="rounded-xl overflow-hidden">
       <button
         type="button"
         className={classNames(
@@ -176,7 +176,7 @@ function MobileDropdown({
         />
       </button>
       {expanded && (
-        <div className="border-t border-border bg-surface pb-2">
+        <div className="bg-surface pb-2 pt-1">
           {entry.children.map((child) => {
             const childActive = isNavActive(pathname, child.href);
             return (
@@ -273,9 +273,9 @@ export function Navbar() {
   const closeMobile = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm md:shadow-none md:border-b md:border-border">
       <div className="grid grid-cols-12 items-stretch">
-        <div className="col-span-6 md:col-span-3 border-r border-border flex">
+        <div className="col-span-6 md:col-span-3 flex md:border-r md:border-border">
           <Container className="py-4 sm:py-5 flex items-center">
             <Link
               href="/"
@@ -300,12 +300,12 @@ export function Navbar() {
           </Container>
         </div>
 
-        <div className="col-span-6 md:col-span-3 border-l border-border flex">
+        <div className="col-span-6 md:col-span-3 flex md:border-l md:border-border">
           <Container className="py-4 sm:py-5 flex items-center justify-end gap-3 sm:gap-4 w-full">
             <Link
               href="/contact"
               className={classNames(
-                "inline-flex min-h-11 items-center text-base md:text-lg font-medium text-brand-gray hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                "hidden md:inline-flex min-h-11 items-center text-base md:text-lg font-medium text-brand-gray hover:text-brand-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                 isNavActive(pathname, "/contact") &&
                   "text-accent font-semibold"
               )}
@@ -318,7 +318,7 @@ export function Navbar() {
 
             <button
               type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl p-2 ring-1 ring-border md:hidden"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl p-2 md:hidden hover:bg-brand-light/80"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
@@ -342,12 +342,27 @@ export function Navbar() {
       )}
 
       {open && (
-        <div className="relative z-50 border-t border-border bg-surface md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto">
+        <div className="relative z-50 bg-surface md:hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto shadow-sm">
           <Container className="py-4">
             <nav className="grid gap-2" aria-label="Mobile">
               {nav.map((entry) =>
                 renderNavEntry(entry, pathname, "mobile", closeMobile)
               )}
+              <Link
+                href="/contact"
+                onClick={closeMobile}
+                className={classNames(
+                  "flex min-h-11 items-center rounded-xl px-4 py-3 text-sm font-medium",
+                  isNavActive(pathname, "/contact")
+                    ? "bg-brand-light text-accent font-semibold"
+                    : "text-brand-gray hover:bg-brand-light"
+                )}
+                aria-current={
+                  isNavActive(pathname, "/contact") ? "page" : undefined
+                }
+              >
+                Contact us
+              </Link>
             </nav>
           </Container>
         </div>
